@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/home"
-        android:title="TODO" />
+        android:title="@string/menu_home" />
 
     <item android:id="@+id/chatList"
-        android:title="TODO" />
+        android:title="@string/menu_chat" />
 
     <item android:id="@+id/myPage"
-        android:title="TODO" />
+        android:title="@string/menu_my_page" />
 </menu>
