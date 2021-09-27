@@ -1,7 +1,9 @@
 package com.yoochangwonspro.usedtradeproject.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -51,8 +53,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding = fragmentHomeBinding
 
         articleDB = Firebase.database.reference.child(DB_ARTICLES)
-
         articleAdapter = ArticleAdapter()
+
         fragmentHomeBinding.articleRecyclerView.layoutManager = LinearLayoutManager(context)
         fragmentHomeBinding.articleRecyclerView.adapter = articleAdapter
 
@@ -60,6 +62,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         articleDB.addChildEventListener(listener)
     }
 
+    // 뷰가 다시 onResume 상태일때 adapter 의 데이터를 갱신한다.
     override fun onResume() {
         super.onResume()
         articleAdapter.notifyDataSetChanged()
