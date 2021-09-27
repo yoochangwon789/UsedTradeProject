@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.yoochangwonspro.usedtradeproject.R
 import com.yoochangwonspro.usedtradeproject.databinding.FragmentHomeBinding
 
@@ -11,6 +14,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private var binding: FragmentHomeBinding? = null
     private lateinit var articleAdapter: ArticleAdapter
+    private val auth: FirebaseAuth by lazy {
+        Firebase.auth
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
