@@ -35,4 +35,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         articleDB.addChildEventListener()
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        articleDB.removeEventListener()
+    }
 }
