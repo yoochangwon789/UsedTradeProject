@@ -52,6 +52,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val fragmentHomeBinding = FragmentHomeBinding.bind(view)
         binding = fragmentHomeBinding
 
+        articleList.clear()
         articleDB = Firebase.database.reference.child(DB_ARTICLES)
         articleAdapter = ArticleAdapter()
 
