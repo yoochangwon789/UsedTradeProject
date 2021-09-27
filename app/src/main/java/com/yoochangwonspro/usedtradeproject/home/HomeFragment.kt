@@ -60,6 +60,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         articleDB.addChildEventListener(listener)
     }
 
+    override fun onResume() {
+        super.onResume()
+        articleAdapter.notifyDataSetChanged()
+    }
+
     /*
      * Activity 같은 경우에는 엑티비티를 종료하면 View 가 destroy 가 되면서 이벤트가 다 사라지게 되지만
      * Fragment 라이프 싸이클 같은 경우에는 메뉴 하단 탭을 바꾸고 다시 원래의 탭으로 돌아오게 되면 뷰가
