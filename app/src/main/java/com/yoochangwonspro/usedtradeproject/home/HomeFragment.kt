@@ -9,6 +9,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.yoochangwonspro.usedtradeproject.DBKey.Companion.DB_ARTICLES
 import com.yoochangwonspro.usedtradeproject.R
 import com.yoochangwonspro.usedtradeproject.databinding.FragmentHomeBinding
 
@@ -26,7 +27,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val fragmentHomeBinding = FragmentHomeBinding.bind(view)
         binding = fragmentHomeBinding
 
-        articleDB = Firebase.database.reference
+        articleDB = Firebase.database.reference.child(DB_ARTICLES)
 
         articleAdapter = ArticleAdapter()
         fragmentHomeBinding.articleRecyclerView.layoutManager = LinearLayoutManager(context)
