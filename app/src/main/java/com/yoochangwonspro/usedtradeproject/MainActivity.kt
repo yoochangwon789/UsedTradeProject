@@ -2,6 +2,7 @@ package com.yoochangwonspro.usedtradeproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.yoochangwonspro.usedtradeproject.chatlist.ChatListFragment
 import com.yoochangwonspro.usedtradeproject.home.HomeFragment
@@ -20,11 +21,18 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.home -> {}
-                R.id.chatList -> {}
-                R.id.myPage -> {}
+                R.id.home -> replaceFragment(homeFragment)
+                R.id.chatList -> replaceFragment(chatListFragment)
+                R.id.myPage -> replaceFragment(myPageFragment)
             }
             true
+        }
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.fragmentContainer, fragment)
+            commit()
         }
     }
 }
