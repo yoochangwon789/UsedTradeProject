@@ -32,5 +32,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         articleAdapter = ArticleAdapter()
         fragmentHomeBinding.articleRecyclerView.layoutManager = LinearLayoutManager(context)
         fragmentHomeBinding.articleRecyclerView.adapter = articleAdapter
+
+        articleDB.addChildEventListener()
     }
 }
