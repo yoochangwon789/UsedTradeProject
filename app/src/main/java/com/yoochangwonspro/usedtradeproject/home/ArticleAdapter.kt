@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.yoochangwonspro.usedtradeproject.databinding.ItemArticleBinding
 import java.text.SimpleDateFormat
 import java.util.*
@@ -23,6 +24,12 @@ class ArticleAdapter : ListAdapter<ArticleModel, ArticleAdapter.ArticleItemViewH
             binding.titleTextView.text = articleModel.title
             binding.dateTextView.text = format.format(date).toString()
             binding.priceTextView.text = articleModel.price
+
+            if (articleModel.imageUrl.isNotEmpty()) {
+                Glide.with(binding.thumbnailImageView.context)
+                    .load(articleModel.imageUrl)
+                    .into(binding.thumbnailImageView)
+            }
         }
     }
 
