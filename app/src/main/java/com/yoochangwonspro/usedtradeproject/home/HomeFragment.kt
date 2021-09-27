@@ -25,9 +25,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
     private lateinit var articleDB: DatabaseReference
 
+    private val articleList = mutableListOf<ArticleModel>()
     private val listener = object : ChildEventListener {
         override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-            TODO("Not yet implemented")
+            val articleModel = snapshot.getValue(ArticleModel::class.java)
+            articleModel ?: return
+
+            articleList.add(articleModel)
+            articleAdapter.submitList(articleList)
         }
 
         override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {}
@@ -51,12 +56,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         fragmentHomeBinding.articleRecyclerView.layoutManager = LinearLayoutManager(context)
         fragmentHomeBinding.articleRecyclerView.adapter = articleAdapter
 
-        articleDB.addChildEventListener()
+
+        articleDB.addChildEventListener(listener)
     }
 
+    /*
+     * Activity 같은 경우에는 엑티비티를 종료하면 View 가 destroy 가 되면서 이벤트가 다 사라지게 되지만
+     * Fragment 라이프 싸이클 같은 경우에는 메뉴 하단 탭을 바꾸고 다시 원래의 탭으로 돌아오게 되면 뷰가
+     * 계속 그려질 수 있고(재사용) 이벤트 콜백같은 경우 onViewCreated 호출 될 때 마다 중복된 이벤트가 계속 생길 수 있다.
+     * 그래서 onDestroyView 가 호출되었을 때 이벤트를 지워주는 형식으로 구현해야 한다
+     * */
     override fun onDestroyView() {
         super.onDestroyView()
 
-        articleDB.removeEventListener()
+        articleDB.removeEventListener(listener)
     }
 }
