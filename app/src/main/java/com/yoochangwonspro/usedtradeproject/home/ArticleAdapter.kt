@@ -1,22 +1,51 @@
 package com.yoochangwonspro.usedtradeproject.home
 
+import android.annotation.SuppressLint
+import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.yoochangwonspro.usedtradeproject.databinding.ItemArticleBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ArticleAdapter : ListAdapter<ArticleModel, ArticleAdapter.ArticleItemViewHolder>(diffUtil) {
 
     inner class ArticleItemViewHolder(private val binding: ItemArticleBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SimpleDateFormat")
+        fun bind(articleModel: ArticleModel) {
+            val format = SimpleDateFormat("MM월 dd일")
+            val date = Date(articleModel.createdAt)
+
+            binding.titleTextView.text = articleModel.title
+            binding.dateTextView.text = format.format(date).toString()
+            binding.priceTextView.text = articleModel.price
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleItemViewHolder {
-        TODO("Not yet implemented")
+        return ArticleItemViewHolder(ItemArticleBinding.inflate(LayoutInflater.from(parent.context),
+            parent,
+            false))
     }
 
     override fun onBindViewHolder(holder: ArticleItemViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.bind(currentList[position])
+    }
+
+    companion object {
+        val diffUtil = object : DiffUtil.ItemCallback<ArticleModel>() {
+            override fun areItemsTheSame(oldItem: ArticleModel, newItem: ArticleModel): Boolean {
+                return oldItem.createdAt == newItem.createdAt
+            }
+
+            override fun areContentsTheSame(oldItem: ArticleModel, newItem: ArticleModel): Boolean {
+                return oldItem == newItem
+            }
+
+        }
     }
 }
