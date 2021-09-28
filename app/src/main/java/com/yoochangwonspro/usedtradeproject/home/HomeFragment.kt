@@ -60,6 +60,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         fragmentHomeBinding.articleRecyclerView.layoutManager = LinearLayoutManager(context)
         fragmentHomeBinding.articleRecyclerView.adapter = articleAdapter
 
+        fragmentHomeBinding.addFloatingButton.setOnClickListener {
+            context?.let {
+                val intent = Intent(it, ArticleAddActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
         articleDB.addChildEventListener(listener)
     }
 
