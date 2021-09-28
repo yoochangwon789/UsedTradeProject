@@ -1,11 +1,13 @@
 package com.yoochangwonspro.usedtradeproject.home
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -25,7 +27,7 @@ class AddArticleActivity : AppCompatActivity() {
             when {
                 ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                         == PackageManager.PERMISSION_GRANTED -> {
-                            startContentProvider()
+                    startContentProvider()
                 }
                 shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE) -> {
                     showPermissionContextPopup()
@@ -40,14 +42,15 @@ class AddArticleActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
-        grantResults: IntArray
+        grantResults: IntArray,
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         when (requestCode) {
             1010 -> {
                 if (grantResults.isNotEmpty() &&
-                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED
+                ) {
                     startContentProvider()
                 } else {
                     Toast.makeText(this, "권한을 거부하셨습니다.", Toast.LENGTH_SHORT).show()
@@ -59,5 +62,13 @@ class AddArticleActivity : AppCompatActivity() {
     private fun startContentProvider() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
+        startForResult.launch(intent)
     }
+
+    private val startForResult = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode != Activity.RESULT_OK) {
+
+            }
+        }
 }
