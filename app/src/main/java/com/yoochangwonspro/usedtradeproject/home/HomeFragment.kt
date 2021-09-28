@@ -2,9 +2,7 @@ package com.yoochangwonspro.usedtradeproject.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
@@ -62,7 +60,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         fragmentHomeBinding.addFloatingButton.setOnClickListener {
             context?.let {
-                val intent = Intent(it, ArticleAddActivity::class.java)
+                val intent = Intent(it, AddArticleActivity::class.java)
                 startActivity(intent)
             }
         }
