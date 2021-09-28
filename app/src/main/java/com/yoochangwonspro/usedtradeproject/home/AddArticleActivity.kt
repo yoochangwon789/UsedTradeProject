@@ -55,4 +55,9 @@ class AddArticleActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun startContentProvider() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "image/*"
+    }
 }
