@@ -30,14 +30,19 @@ class AddArticleActivity : AppCompatActivity() {
 
                 }
                 else -> {
-
+                    requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
                 }
             }
         }
     }
 
-    private fun navigatePhotos() {
-        val intent = Intent(Intent.ACTION_GET_CONTENT)
-        intent.type = "image/*"
-    }
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+
+            } else {
+
+            }
+        }
 }
