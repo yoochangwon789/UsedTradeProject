@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
@@ -64,6 +65,17 @@ class AddArticleActivity : AppCompatActivity() {
                 }
             }
         }
+
+        submitButton.setOnClickListener {
+            val title = findViewById<EditText>(R.id.titleEditText).text.toString()
+            val price = findViewById<EditText>(R.id.priceEditText).text.toString()
+            val sellerId = auth.currentUser?.uid.orEmpty()
+
+            val model = ArticleModel(sellerId, title, System.currentTimeMillis(), "$price 원", "")
+            articleDB.push().setValue(model)
+
+            finish()
+        }
     }
 
     override fun onRequestPermissionsResult(
@@ -115,7 +127,7 @@ class AddArticleActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle("권한이 필요합니다.")
             .setMessage("사진을 가져오기 위해 필요합니다.")
-            .setPositiveButton("동의") {_, _ ->
+            .setPositiveButton("동의") { _, _ ->
                 requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1010)
             }
             .create()
