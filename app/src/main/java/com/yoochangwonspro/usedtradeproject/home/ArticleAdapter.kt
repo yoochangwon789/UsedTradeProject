@@ -30,6 +30,10 @@ class ArticleAdapter(val onItemClicked: (ArticleModel) -> Unit) : ListAdapter<Ar
                     .load(articleModel.imageUrl)
                     .into(binding.thumbnailImageView)
             }
+
+            binding.root.setOnClickListener {
+                onItemClicked(articleModel)
+            }
         }
     }
 
