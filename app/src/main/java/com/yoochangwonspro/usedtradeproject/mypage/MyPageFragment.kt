@@ -27,6 +27,23 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
                 val email = binding.emailEditText.text.toString()
                 val password = binding.passwordEditText.text.toString()
 
+                if (auth.currentUser == null) {
+                    // 로그인
+                } else {
+                    // 로그아웃
+                    auth.signOut()
+
+                    binding.apply {
+                        emailEditText.text.clear()
+                        emailEditText.isEnabled = true
+                        passwordEditText.text.clear()
+                        passwordEditText.isEnabled = true
+
+                        signInOutButton.text = "로그인"
+                        signInOutButton.isEnabled = false
+                        signUpButton.isEnabled = false
+                    }
+                }
             }
         }
 
