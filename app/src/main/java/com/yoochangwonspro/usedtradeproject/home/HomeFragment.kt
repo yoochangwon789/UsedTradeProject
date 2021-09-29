@@ -14,6 +14,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.yoochangwonspro.usedtradeproject.DBKey.Companion.CHILD_CHAT
 import com.yoochangwonspro.usedtradeproject.DBKey.Companion.DB_ARTICLES
 import com.yoochangwonspro.usedtradeproject.DBKey.Companion.DB_USERS
 import com.yoochangwonspro.usedtradeproject.R
@@ -72,6 +73,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                             key = System.currentTimeMillis()
                         )
 
+                        userDB.child(auth.currentUser?.uid.toString())
+                            .child(CHILD_CHAT)
+                            .push()
+                            .setValue(chatRoom)
+
+                        userDB.child(articleModel.sellerId)
+                            .child(CHILD_CHAT)
+                            .push()
+                            .setValue(chatRoom)
+
+                        Snackbar.make(view, "채팅방이 생성되었습니다. 채팅탭에서 확인해주세요.", Snackbar.LENGTH_LONG).show()
 
                     } else {
                         // 내가 올린 아이템
