@@ -2,6 +2,7 @@ package com.yoochangwonspro.usedtradeproject.home
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -87,4 +88,15 @@ class AddArticleActivity : AppCompatActivity() {
                 }
             }
         }
+
+    private fun showPermissionContextPopup() {
+        AlertDialog.Builder(this)
+            .setTitle("권한이 필요합니다.")
+            .setMessage("사진을 가져오기 위해 필요합니다.")
+            .setPositiveButton("동의") {_, _ ->
+                requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1010)
+            }
+            .create()
+            .show()
+   }
 }
