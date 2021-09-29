@@ -68,6 +68,9 @@ class AddArticleActivity : AppCompatActivity() {
     private val startForResult = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode != Activity.RESULT_OK) {
+                return@registerForActivityResult
+            }
+            else {
 
             }
         }
