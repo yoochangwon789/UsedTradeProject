@@ -15,6 +15,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.yoochangwonspro.usedtradeproject.DBKey.Companion.DB_ARTICLES
+import com.yoochangwonspro.usedtradeproject.DBKey.Companion.DB_USERS
 import com.yoochangwonspro.usedtradeproject.R
 import com.yoochangwonspro.usedtradeproject.chatlist.ChatListItem
 import com.yoochangwonspro.usedtradeproject.databinding.FragmentHomeBinding
@@ -27,6 +28,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         Firebase.auth
     }
     private lateinit var articleDB: DatabaseReference
+    private lateinit var userDB: DatabaseReference
 
     private val articleList = mutableListOf<ArticleModel>()
     private val listener = object : ChildEventListener {
@@ -54,13 +56,23 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding = fragmentHomeBinding
 
         articleList.clear()
+
         articleDB = Firebase.database.reference.child(DB_ARTICLES)
+        userDB = Firebase.database.reference.child(DB_USERS)
+
         articleAdapter = ArticleAdapter(
             onItemClicked = { articleModel ->
                 if (auth.currentUser != null) {
                     // 로그인 상태
                     if (auth.currentUser?.uid != articleModel.sellerId) {
-                        val chatRoom = ChatListItem()
+                        val chatRoom = ChatListItem(
+                            buyerId = auth.currentUser?.uid,
+                            sellerId = articleModel.sellerId,
+                            itemTitle = articleModel.title,
+                            key = System.currentTimeMillis()
+                        )
+
+
                     } else {
                         // 내가 올린 아이템
                         Snackbar.make(view, "현 사용자의 아이템 입니다.", Snackbar.LENGTH_LONG).show()
