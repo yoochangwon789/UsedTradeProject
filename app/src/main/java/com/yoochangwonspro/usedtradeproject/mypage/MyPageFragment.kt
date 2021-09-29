@@ -2,6 +2,7 @@ package com.yoochangwonspro.usedtradeproject.mypage
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.yoochangwonspro.usedtradeproject.R
 import com.yoochangwonspro.usedtradeproject.databinding.FragmentMypageBinding
@@ -14,5 +15,21 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
         super.onViewCreated(view, savedInstanceState)
         val fragmentMyPageBinding = FragmentMypageBinding.bind(view)
         binding = fragmentMyPageBinding
+
+        fragmentMyPageBinding.signUpButton.setOnClickListener {
+            binding?.let { binding ->
+                val email = binding.emailEditText.text.toString()
+                val password = binding.passwordEditText.text.toString()
+
+            }
+        }
+
+        fragmentMyPageBinding.signInOutButton.setOnClickListener {
+            binding?.let { binding ->
+                val email = binding.emailEditText.text.toString()
+                val password = binding.passwordEditText.text.toString()
+
+            }
+        }
     }
 }
