@@ -11,7 +11,7 @@ import com.yoochangwonspro.usedtradeproject.databinding.ItemArticleBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-class ArticleAdapter : ListAdapter<ArticleModel, ArticleAdapter.ArticleItemViewHolder>(diffUtil) {
+class ArticleAdapter(val onItemClicked: (ArticleModel) -> Unit) : ListAdapter<ArticleModel, ArticleAdapter.ArticleItemViewHolder>(diffUtil) {
 
     inner class ArticleItemViewHolder(private val binding: ItemArticleBinding) :
         RecyclerView.ViewHolder(binding.root) {
