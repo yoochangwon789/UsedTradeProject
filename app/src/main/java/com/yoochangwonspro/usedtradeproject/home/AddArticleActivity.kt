@@ -71,11 +71,28 @@ class AddArticleActivity : AppCompatActivity() {
             val price = findViewById<EditText>(R.id.priceEditText).text.toString()
             val sellerId = auth.currentUser?.uid.orEmpty()
 
+            // 중간에 이미지가 있으면 업로드 과정을 추가
+            if (selectedUri != null) {
+                val photoUri = selectedUri ?: return@setOnClickListener
+                uploadPhoto(
+                    photoUri,
+                    successHandler = {},
+                    errorHandler = {}
+                )
+            }
+
             val model = ArticleModel(sellerId, title, System.currentTimeMillis(), "$price 원", "")
+
+            // setValue 는 객체 타입을 데이터베이스에 add 할 때 필요한 함수
+            // push 는 데이터를 추가할 때 임이의 키값을 가지면서 추가 됨
             articleDB.push().setValue(model)
 
             finish()
         }
+    }
+
+    private fun uploadPhoto(uri: Uri, successHandler: () -> Unit, errorHandler: () -> Unit) {
+
     }
 
     override fun onRequestPermissionsResult(
