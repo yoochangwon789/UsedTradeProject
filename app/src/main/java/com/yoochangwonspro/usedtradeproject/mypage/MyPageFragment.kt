@@ -31,5 +31,25 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
 
             }
         }
+
+        fragmentMyPageBinding.emailEditText.addTextChangedListener {
+            binding?.let { binding ->
+                val enable = binding.emailEditText.text.isNotEmpty()
+                        && binding.passwordEditText.text.isNotEmpty()
+
+                binding.signInOutButton.isEnabled = enable
+                binding.signUpButton.isEnabled = enable
+            }
+        }
+
+        fragmentMyPageBinding.passwordEditText.addTextChangedListener {
+            binding?.let { binding ->
+                val enable = binding.emailEditText.text.isNotEmpty()
+                        && binding.passwordEditText.text.isNotEmpty()
+
+                binding.signInOutButton.isEnabled = enable
+                binding.signUpButton.isEnabled = enable
+            }
+        }
     }
 }
