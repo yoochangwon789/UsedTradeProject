@@ -90,6 +90,9 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
     }
 
     private fun successSignIn() {
-
+        if (auth.currentUser == null) {
+            Toast.makeText(context, "로그인을 실패했습니다. 다시 시도해 주세요.", Toast.LENGTH_SHORT).show()
+            return
+        }
     }
 }
