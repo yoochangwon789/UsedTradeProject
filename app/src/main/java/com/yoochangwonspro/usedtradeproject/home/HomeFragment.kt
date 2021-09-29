@@ -61,13 +61,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         fragmentHomeBinding.addFloatingButton.setOnClickListener {
             context?.let {
-                // TODO : 로그인 기능 구현 후에 주석 제거 할 예정
-//                if (auth.currentUser != null) {
+                if (auth.currentUser != null) {
                     val intent = Intent(it, AddArticleActivity::class.java)
                     startActivity(intent)
-//                } else {
-//                    Snackbar.make(view, "로그인 후 사용해 주세요", Snackbar.LENGTH_LONG).show()
-//                }
+                } else {
+                    Snackbar.make(view, "로그인 후 사용해 주세요", Snackbar.LENGTH_LONG).show()
+                }
             }
         }
 
