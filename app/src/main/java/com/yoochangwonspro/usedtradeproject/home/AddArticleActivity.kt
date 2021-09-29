@@ -69,6 +69,8 @@ class AddArticleActivity : AppCompatActivity() {
             val price = findViewById<EditText>(R.id.priceEditText).text.toString()
             val sellerId = auth.currentUser?.uid.orEmpty()
 
+            showProgress()
+
             // 중간에 이미지가 있으면 업로드 과정을 추가
             if (selectedUri != null) {
                 val photoUri = selectedUri ?: return@setOnClickListener
@@ -79,13 +81,12 @@ class AddArticleActivity : AppCompatActivity() {
                     },
                     errorHandler = {
                         Toast.makeText(this, "사진 업로드에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                        hideProgress()
                     }
                 )
             } else {
                 uploadArticle(sellerId, title, price, "")
             }
-
-            finish()
         }
     }
 
@@ -110,10 +111,12 @@ class AddArticleActivity : AppCompatActivity() {
 
     private fun uploadArticle(sellerId: String, title: String, price: String, imageUrl: String) {
         val model = ArticleModel(sellerId, title, System.currentTimeMillis(), "$price 원", imageUrl)
-
         // setValue 는 객체 타입을 데이터베이스에 add 할 때 필요한 함수
         // push 는 데이터를 추가할 때 임이의 키값을 가지면서 추가 됨
         articleDB.push().setValue(model)
+
+        hideProgress()
+        finish()
     }
 
     override fun onRequestPermissionsResult(
