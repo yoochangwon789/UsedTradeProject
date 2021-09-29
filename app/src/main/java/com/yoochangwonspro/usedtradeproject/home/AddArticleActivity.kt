@@ -76,27 +76,31 @@ class AddArticleActivity : AppCompatActivity() {
                 val photoUri = selectedUri ?: return@setOnClickListener
                 uploadPhoto(
                     photoUri,
-                    successHandler = {
-
+                    successHandler = { uri ->
+                        uploadArticle(sellerId, title, price, uri)
                     },
                     errorHandler = {
                         Toast.makeText(this, "사진 업로드에 실패했습니다.", Toast.LENGTH_SHORT).show()
                     }
                 )
+            } else {
+                uploadArticle(sellerId, title, price, "")
             }
-
-            val model = ArticleModel(sellerId, title, System.currentTimeMillis(), "$price 원", "")
-
-            // setValue 는 객체 타입을 데이터베이스에 add 할 때 필요한 함수
-            // push 는 데이터를 추가할 때 임이의 키값을 가지면서 추가 됨
-            articleDB.push().setValue(model)
 
             finish()
         }
     }
 
-    private fun uploadPhoto(uri: Uri, successHandler: () -> Unit, errorHandler: () -> Unit) {
+    private fun uploadPhoto(uri: Uri, successHandler: (String) -> Unit, errorHandler: () -> Unit) {
 
+    }
+
+    private fun uploadArticle(sellerId: String, title: String, price: String, imageUrl: String) {
+        val model = ArticleModel(sellerId, title, System.currentTimeMillis(), "$price 원", imageUrl)
+
+        // setValue 는 객체 타입을 데이터베이스에 add 할 때 필요한 함수
+        // push 는 데이터를 추가할 때 임이의 키값을 가지면서 추가 됨
+        articleDB.push().setValue(model)
     }
 
     override fun onRequestPermissionsResult(
