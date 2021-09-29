@@ -38,7 +38,8 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
                                 if (it.isSuccessful) {
                                     successSignIn()
                                 } else {
-                                    Toast.makeText(context, "로그인을 실패했습니다.", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(context, "로그인을 실패했습니다.", Toast.LENGTH_SHORT)
+                                        .show()
                                 }
                             }
                     }
@@ -65,6 +66,24 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
                 val email = binding.emailEditText.text.toString()
                 val password = binding.passwordEditText.text.toString()
 
+                activity?.let { activity ->
+                    auth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(activity) { task ->
+                            if (task.isSuccessful) {
+                                Toast.makeText(
+                                    context,
+                                    "회원가입에 성공했습니다. 로그인 버튼을 눌러주세요",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    "회원가입에 실패했습니다. 이미 가입한 이메일일 수 있습니다.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                }
             }
         }
 
