@@ -89,6 +89,34 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        if (auth.currentUser == null) {
+            binding?.let { binding ->
+                binding.emailEditText.text.clear()
+                binding.emailEditText.isEnabled = true
+                binding.passwordEditText.text.clear()
+                binding.passwordEditText.isEnabled = true
+
+                binding.signInOutButton.text = "로그인"
+                binding.signInOutButton.isEnabled = false
+                binding.signUpButton.isEnabled = false
+            }
+        } else {
+            binding?.let { binding ->
+                binding.emailEditText.setText(auth.currentUser?.email)
+                binding.emailEditText.isEnabled = false
+                binding.passwordEditText.setText("************")
+                binding.passwordEditText.isEnabled = false
+
+                binding.signInOutButton.text = "로그아웃"
+                binding.signInOutButton.isEnabled = true
+                binding.signUpButton.isEnabled = false
+            }
+        }
+    }
+
     private fun successSignIn() {
         if (auth.currentUser == null) {
             Toast.makeText(context, "로그인을 실패했습니다. 다시 시도해 주세요.", Toast.LENGTH_SHORT).show()
