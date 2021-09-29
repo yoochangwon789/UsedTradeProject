@@ -94,5 +94,10 @@ class MyPageFragment : Fragment(R.layout.fragment_mypage) {
             Toast.makeText(context, "로그인을 실패했습니다. 다시 시도해 주세요.", Toast.LENGTH_SHORT).show()
             return
         }
+
+        binding?.emailEditText?.isEnabled = false
+        binding?.passwordEditText?.isEnabled = false
+        binding?.signUpButton?.isEnabled = false
+        binding?.signInOutButton?.text = "로그아웃"
     }
 }
