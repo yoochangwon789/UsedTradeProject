@@ -7,14 +7,12 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
@@ -136,6 +134,14 @@ class AddArticleActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun showProgress() {
+        findViewById<ProgressBar>(R.id.progressBar).isVisible = true
+    }
+
+    private fun hideProgress() {
+        findViewById<ProgressBar>(R.id.progressBar).isVisible = false
     }
 
     private fun startContentProvider() {
