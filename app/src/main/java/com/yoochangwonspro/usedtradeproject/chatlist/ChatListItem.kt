@@ -1,6 +1,6 @@
 package com.yoochangwonspro.usedtradeproject.chatlist
 
-data class ChatList(
+data class ChatListItem(
     val buyerId: String,
     val sellerId: String,
     val itemTitle: String,

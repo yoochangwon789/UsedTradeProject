@@ -16,6 +16,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.yoochangwonspro.usedtradeproject.DBKey.Companion.DB_ARTICLES
 import com.yoochangwonspro.usedtradeproject.R
+import com.yoochangwonspro.usedtradeproject.chatlist.ChatListItem
 import com.yoochangwonspro.usedtradeproject.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -59,7 +60,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 if (auth.currentUser != null) {
                     // 로그인 상태
                     if (auth.currentUser?.uid != articleModel.sellerId) {
-
+                        val chatRoom = ChatListItem()
                     } else {
                         // 내가 올린 아이템
                         Snackbar.make(view, "현 사용자의 아이템 입니다.", Snackbar.LENGTH_LONG).show()
