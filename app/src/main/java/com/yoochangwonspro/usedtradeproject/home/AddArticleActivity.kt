@@ -14,6 +14,14 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
+import com.yoochangwonspro.usedtradeproject.DBKey.Companion.DB_ARTICLES
 import com.yoochangwonspro.usedtradeproject.R
 
 class AddArticleActivity : AppCompatActivity() {
@@ -23,6 +31,16 @@ class AddArticleActivity : AppCompatActivity() {
     }
 
     private var selectedUri: Uri? = null
+
+    private val auth: FirebaseAuth by lazy {
+        Firebase.auth
+    }
+    private val storage: FirebaseStorage by lazy {
+        Firebase.storage
+    }
+    private val articleDB: DatabaseReference by lazy {
+        Firebase.database.reference.child(DB_ARTICLES)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
