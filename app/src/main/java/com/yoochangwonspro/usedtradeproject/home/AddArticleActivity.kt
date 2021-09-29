@@ -30,6 +30,10 @@ class AddArticleActivity : AppCompatActivity() {
         findViewById(R.id.imageAddButton)
     }
 
+    private val submitButton: Button by lazy {
+        findViewById(R.id.submitButton)
+    }
+
     private var selectedUri: Uri? = null
 
     private val auth: FirebaseAuth by lazy {
