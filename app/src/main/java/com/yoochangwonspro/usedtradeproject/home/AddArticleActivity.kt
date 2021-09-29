@@ -4,8 +4,10 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -18,6 +20,8 @@ class AddArticleActivity : AppCompatActivity() {
     private val imageAddButton: Button by lazy {
         findViewById(R.id.imageAddButton)
     }
+
+    private var selectedUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,10 +72,19 @@ class AddArticleActivity : AppCompatActivity() {
     private val startForResult = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode != Activity.RESULT_OK) {
+                Toast.makeText(this, "사진을 가져오지 못했습니다.", Toast.LENGTH_SHORT).show()
                 return@registerForActivityResult
             }
             else {
+                val intent = result.data
+                val uri = intent?.data
 
+                if (uri != null) {
+                    findViewById<ImageView>(R.id.photoImageView).setImageURI(uri)
+                    selectedUri = uri
+                } else {
+                    Toast.makeText(this, "사진을 가져오지 못했습니다.", Toast.LENGTH_SHORT).show()
+                }
             }
         }
 }
