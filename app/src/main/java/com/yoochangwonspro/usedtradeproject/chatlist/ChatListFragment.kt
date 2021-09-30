@@ -30,6 +30,8 @@ class ChatListFragment : Fragment(R.layout.fragment_chatlist) {
             }
         )
 
+        chatRoomList.clear()
+
         fragmentChatListBinding.chatListRecyclerView.apply {
             adapter = chatListAdapter
             layoutManager = LinearLayoutManager(context)
@@ -38,5 +40,10 @@ class ChatListFragment : Fragment(R.layout.fragment_chatlist) {
         if (auth.currentUser == null) {
             return
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        chatListAdapter.notifyDataSetChanged()
     }
 }
