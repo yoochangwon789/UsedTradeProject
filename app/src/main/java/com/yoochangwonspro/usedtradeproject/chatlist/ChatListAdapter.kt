@@ -14,6 +14,9 @@ class ChatListAdapter(val onItemClicked: (ChatListItem) -> Unit) : ListAdapter<C
 
         fun bind(chatListItem: ChatListItem) {
 
+            binding.root.setOnClickListener {
+                onItemClicked(chatListItem)
+            }
         }
     }
 
@@ -30,11 +33,11 @@ class ChatListAdapter(val onItemClicked: (ChatListItem) -> Unit) : ListAdapter<C
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<ChatListItem>() {
             override fun areItemsTheSame(oldItem: ChatListItem, newItem: ChatListItem): Boolean {
-                TODO("Not yet implemented")
+                return oldItem.key == newItem.key
             }
 
             override fun areContentsTheSame(oldItem: ChatListItem, newItem: ChatListItem): Boolean {
-                TODO("Not yet implemented")
+                return oldItem == newItem
             }
 
         }
