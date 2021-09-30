@@ -15,6 +15,5 @@ class ChatListFragment : Fragment(R.layout.fragment_chatlist) {
         val fragmentChatListBinding = FragmentChatlistBinding.bind(view)
         binding = fragmentChatListBinding
 
-
     }
 }

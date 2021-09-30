@@ -13,6 +13,7 @@ class ChatListAdapter(val onItemClicked: (ChatListItem) -> Unit) : ListAdapter<C
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(chatListItem: ChatListItem) {
+            binding.chatRoomTitleTextView.text = chatListItem.itemTitle
 
             binding.root.setOnClickListener {
                 onItemClicked(chatListItem)
