@@ -1,5 +1,6 @@
 package com.yoochangwonspro.usedtradeproject.chatlist
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -14,6 +15,7 @@ import com.google.firebase.ktx.Firebase
 import com.yoochangwonspro.usedtradeproject.DBKey.Companion.CHILD_CHAT
 import com.yoochangwonspro.usedtradeproject.DBKey.Companion.DB_USERS
 import com.yoochangwonspro.usedtradeproject.R
+import com.yoochangwonspro.usedtradeproject.chatdetail.ChatRoomActivity
 import com.yoochangwonspro.usedtradeproject.databinding.FragmentChatlistBinding
 
 class ChatListFragment : Fragment(R.layout.fragment_chatlist) {
@@ -31,8 +33,13 @@ class ChatListFragment : Fragment(R.layout.fragment_chatlist) {
         binding = fragmentChatListBinding
 
         chatListAdapter = ChatListAdapter(
-            onItemClicked = {
+            onItemClicked = { chatRoom ->
                 // 채팅방으로 이동하는 코드
+                context?.let {
+                    val intent = Intent(it, ChatRoomActivity::class.java)
+                    intent.putExtra("chatKey", chatRoom.key)
+                    startActivity(intent)
+                }
             }
         )
 
