@@ -13,7 +13,8 @@ class ChatItemAdapter : ListAdapter<ChatItem, ChatItemAdapter.ViewHolder>(diffUt
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(chatItem: ChatItem) {
-
+            binding.senderTextView.text = chatItem.senderId
+            binding.messageTextView.text = chatItem.message
         }
     }
 
