@@ -13,6 +13,8 @@ class ChatRoomActivity : AppCompatActivity() {
         Firebase.auth
     }
 
+    private val chatList = mutableListOf<ChatItem>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_room)
