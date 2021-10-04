@@ -8,7 +8,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -53,6 +52,14 @@ class ChatListFragment : Fragment(R.layout.fragment_chatlist) {
 
         chatDB.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+
+                /*
+                * ChatListItem 객체 타입의 데이터가 여러개일 경우 snapshot 은 List 를 가진다
+                * 그러므로 snapshot 의 하위 데이터 children 키워드를 사용해(chatDB 에 child 는 CHILD_CHAT 까지의 데이터 그하위에 있는 데이터를 가져오기 위함) forEach 문을 돌려서
+                * getValue 함수를 사용해 자바의 객체 타입을 반환받고 (ChatListItem) 타입을 반환
+                * 반환 받은 model 을 adapter 에게 전달하고 RecyclerView 에 데이터들을 출력한다
+               * */
+
                 snapshot.children.forEach {
                     val model = it.getValue(ChatListItem::class.java)
                     model ?: return
