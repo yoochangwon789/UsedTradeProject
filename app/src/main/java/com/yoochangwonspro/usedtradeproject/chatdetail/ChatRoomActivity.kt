@@ -15,6 +15,8 @@ class ChatRoomActivity : AppCompatActivity() {
 
     private val chatList = mutableListOf<ChatItem>()
 
+    private val adapter = ChatItemAdapter()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_room)
