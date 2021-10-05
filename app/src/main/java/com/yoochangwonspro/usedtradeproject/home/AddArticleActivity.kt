@@ -49,20 +49,7 @@ class AddArticleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_article)
 
-        imageAddButton.setOnClickListener {
-            when {
-                ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-                        == PackageManager.PERMISSION_GRANTED -> {
-                    startContentProvider()
-                }
-                shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE) -> {
-                    showPermissionContextPopup()
-                }
-                else -> {
-                    requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1010)
-                }
-            }
-        }
+        initImageAddButton()
 
         submitButton.setOnClickListener {
             val title = findViewById<EditText>(R.id.titleEditText).text.toString()
@@ -86,6 +73,23 @@ class AddArticleActivity : AppCompatActivity() {
                 )
             } else {
                 uploadArticle(sellerId, title, price, "")
+            }
+        }
+    }
+
+    private fun initImageAddButton() {
+        imageAddButton.setOnClickListener {
+            when {
+                ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                        == PackageManager.PERMISSION_GRANTED -> {
+                    startContentProvider()
+                }
+                shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE) -> {
+                    showPermissionContextPopup()
+                }
+                else -> {
+                    requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 1010)
+                }
             }
         }
     }
