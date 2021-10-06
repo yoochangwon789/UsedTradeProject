@@ -53,7 +53,7 @@
         app:borderWidth="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@color/white"
-        app:rippleColor="@null"/>
+        app:rippleColor="@null"
+        app:tint="@color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
