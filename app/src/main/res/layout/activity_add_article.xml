@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="아이템 등록"
-            android:textColor="@color/black"
+            android:textColor="@color/orange"
             android:textSize="20sp"
             android:textStyle="bold"
             tools:ignore="HardcodedText" />
